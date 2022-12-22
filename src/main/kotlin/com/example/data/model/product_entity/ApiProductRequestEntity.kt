@@ -1,4 +1,4 @@
-package com.example.data.model
+package com.example.data.model.product_entity
 
 data class ApiProductRequestEntity(
    val title: String,

@@ -1,21 +1,23 @@
 package com.example.routes
 
-import com.example.data.model.ApiProductRequestEntity
-import com.example.data.model.ProductEntity
-import com.example.data.repository.ProductsRepository
+import com.example.data.model.product_entity.ApiProductRequestEntity
+import com.example.data.model.product_entity.ProductEntity
+import com.example.data.repository.product_repo.ProductsRepository
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.coroutines.delay
 import org.koin.ktor.ext.inject
 
 
-fun Route.products() {
+fun Route.productsRoute() {
 
    val productRepository: ProductsRepository by inject()
 
-   post("/create-product") {
+   post("/shop/create-product") {
+      delay(1000)
       val request = try {
          call.receive<ApiProductRequestEntity>()
       } catch (e: ContentTransformationException) {
@@ -29,7 +31,8 @@ fun Route.products() {
       )
    }
 
-   post("/update-products") {
+   post("/shop/update-product") {
+      delay(1000)
       val request = try {
          call.receive<ProductEntity>()
       } catch (e: ContentTransformationException) {
@@ -46,14 +49,16 @@ fun Route.products() {
       )
    }
 
-   get("/get-all-products") {
+   get("/shop/get-all-products") {
+      delay(1000)
       call.respond(
          HttpStatusCode.OK,
          message = productRepository.getAllProducts()
       )
    }
 
-   get("/get-product-by-id") {
+   get("/shop/get-product") {
+      delay(1000)
       val productId = call.request.queryParameters["productId"]
       call.respond(
          status = HttpStatusCode.OK,
@@ -61,7 +66,8 @@ fun Route.products() {
       )
    }
 
-   delete("/delete-product") {
+   delete("/shop/delete-product") {
+      delay(1000)
       val productId = call.request.queryParameters["productId"]
       val response = productRepository.deleteProduct(productId)
       call.respond(

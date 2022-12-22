@@ -1,6 +1,6 @@
 package com.example.data.database
 
-import com.example.data.model.ProductEntity
+import com.example.data.model.product_entity.ProductEntity
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
 

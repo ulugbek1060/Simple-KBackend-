@@ -1,9 +1,9 @@
-package com.example.data.repository
+package com.example.data.repository.product_repo
 
-import com.example.data.model.ApiProductListResponse
-import com.example.data.model.ApiProductRequestEntity
-import com.example.data.model.ApiProductResponse
-import com.example.data.model.ProductEntity
+import com.example.data.model.product_entity.ApiProductListResponse
+import com.example.data.model.product_entity.ApiProductRequestEntity
+import com.example.data.model.product_entity.ApiProductResponse
+import com.example.data.model.product_entity.ProductEntity
 
 interface ProductsRepository {
 
