@@ -33,20 +33,19 @@ fun Route.productsRoute() {
 
    post("/shop/update-product") {
       delay(1000)
-      val request = try {
-         call.receive<ProductEntity>()
+      try {
+         val request = call.receive<ProductEntity>()
+         val response = productRepository.updateProduct(request)
+         call.respond(
+            status = HttpStatusCode.OK,
+            message = response
+         )
       } catch (e: ContentTransformationException) {
          call.respond(
             status = HttpStatusCode.BadRequest,
             message = "Content was invalid!"
          )
-         return@post
       }
-      val response = productRepository.updateProduct(request)
-      call.respond(
-         status = HttpStatusCode.OK,
-         message = response
-      )
    }
 
    get("/shop/get-all-products") {
@@ -59,20 +58,33 @@ fun Route.productsRoute() {
 
    get("/shop/get-product") {
       delay(1000)
-      val productId = call.request.queryParameters["productId"]
-      call.respond(
-         status = HttpStatusCode.OK,
-         message = productRepository.getProductById(productId)
-      )
+      try {
+         val productId = call.request.queryParameters["productId"]!!
+         call.respond(
+            status = HttpStatusCode.OK,
+            message = productRepository.getProductById(productId)
+         )
+      } catch (e: NullPointerException) {
+         call.respond(
+            status = HttpStatusCode.BadRequest,
+            message = "Product id should not be null!"
+         )
+      }
    }
 
    delete("/shop/delete-product") {
       delay(1000)
-      val productId = call.request.queryParameters["productId"]
-      val response = productRepository.deleteProduct(productId)
-      call.respond(
-         status = HttpStatusCode.OK,
-         message = response
-      )
+      try {
+         val productId = call.request.queryParameters["productId"]!!
+         call.respond(
+            status = HttpStatusCode.OK,
+            message = productRepository.deleteProduct(productId)
+         )
+      }catch (e:NullPointerException){
+         call.respond(
+            status = HttpStatusCode.BadRequest,
+            message = "Product id should not be null!"
+         )
+      }
    }
 }

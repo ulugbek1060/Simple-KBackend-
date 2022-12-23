@@ -13,10 +13,10 @@ interface ProductsRepository {
 
    suspend fun updateProduct(productEntity: ProductEntity): ApiProductResponse
 
-   suspend fun getProductById(productId: String?): ApiProductResponse
+   suspend fun getProductById(productId: String): ApiProductResponse
 
    suspend fun getAllProducts(): ApiProductListResponse
 
-   suspend fun deleteProduct(productId: String?): ApiProductResponse
+   suspend fun deleteProduct(productId: String): ApiProductResponse
 
 }

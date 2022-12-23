@@ -80,7 +80,7 @@ class ProductsRepositoryImpl : ProductsRepository {
       }
    }
 
-   override suspend fun getProductById(productId: String?): ApiProductResponse {
+   override suspend fun getProductById(productId: String): ApiProductResponse {
       val product = productList.find { it.id == productId }
       return if (product != null) {
          ApiProductResponse(
@@ -101,7 +101,7 @@ class ProductsRepositoryImpl : ProductsRepository {
       )
    }
 
-   override suspend fun deleteProduct(productId: String?): ApiProductResponse {
+   override suspend fun deleteProduct(productId: String): ApiProductResponse {
       val product = productList.find { it.id == productId }
       return if (product != null) {
          productList.remove(product)
