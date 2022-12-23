@@ -23,7 +23,7 @@ class OrderRepositoryImpl : OrderRepository {
    }
 
    override suspend fun updateOrder(entity: OrderEntity): ApiOrderResponse {
-      val existingOrder = orderList.indexOf(entity)
+      val existingOrder = orderList.indexOfFirst { it.id == entity.id }
       return if (existingOrder != -1) {
          val newOrder = OrderEntity(
             id = entity.id, amount = entity.amount, cartOfProducts = entity.cartOfProducts, dateTime = entity.dateTime

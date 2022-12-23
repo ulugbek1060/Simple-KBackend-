@@ -58,7 +58,8 @@ class ProductsRepositoryImpl : ProductsRepository {
    }
 
    override suspend fun updateProduct(productEntity: ProductEntity): ApiProductResponse {
-      val existingProductIndex = productList.indexOf(productEntity)
+      val existingProductIndex = productList.indexOfFirst { it.id == productEntity.id }
+      println("index ----------------------------> ${existingProductIndex}")
       return if (existingProductIndex != -1) {
          val newProduct = productEntity.copy(
             id = productEntity.id,
@@ -97,7 +98,7 @@ class ProductsRepositoryImpl : ProductsRepository {
    override suspend fun getAllProducts(): ApiProductListResponse {
       return ApiProductListResponse(
          message = "All Products.",
-         products = productList.sortedBy { it.title }
+         products = productList
       )
    }
 

@@ -21,7 +21,7 @@ class CartRepositoryImpl : CartRepository {
    }
 
    override suspend fun updateCart(entity: CartEntity): ApiCartResponse {
-      val existingCartIndex = cartList.indexOf(entity)
+      val existingCartIndex = cartList.indexOfFirst { it.id == entity.id }
       return if (existingCartIndex != -1) {
          val newCart = CartEntity(
             id = entity.id,
