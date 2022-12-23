@@ -17,6 +17,7 @@ class OrderRepositoryImpl : OrderRepository {
          cartOfProducts = entity.cartOfProducts,
          dateTime = entity.dateTime
       )
+      orderList.add(newOrder)
       return ApiOrderResponse(
          message = "Order Successfully created!", order = newOrder
       )
@@ -28,7 +29,7 @@ class OrderRepositoryImpl : OrderRepository {
          val newOrder = OrderEntity(
             id = entity.id, amount = entity.amount, cartOfProducts = entity.cartOfProducts, dateTime = entity.dateTime
          )
-         orderList.add(existingOrder, newOrder)
+         orderList[existingOrder] = newOrder
          ApiOrderResponse(
             message = "Order Successfully updated!", order = newOrder
          )

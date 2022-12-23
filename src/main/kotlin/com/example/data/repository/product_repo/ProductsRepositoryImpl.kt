@@ -69,7 +69,7 @@ class ProductsRepositoryImpl : ProductsRepository {
             price = productEntity.price,
             isFavorite = productEntity.isFavorite
          )
-         productList.add(existingProductIndex, newProduct)
+         productList[existingProductIndex] = newProduct
          ApiProductResponse(
             message = "Product Successfully updated.",
             productEntity = newProduct,

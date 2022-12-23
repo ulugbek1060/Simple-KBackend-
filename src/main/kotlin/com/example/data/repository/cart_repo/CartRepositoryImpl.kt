@@ -29,7 +29,7 @@ class CartRepositoryImpl : CartRepository {
             quantity = entity.quantity,
             price = entity.price
          )
-         cartList.add(existingCartIndex, newCart)
+         cartList[existingCartIndex] = newCart
          ApiCartResponse(
             message = "Cart successfully updated!", cart = newCart
          )
